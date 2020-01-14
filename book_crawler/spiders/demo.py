@@ -18,22 +18,16 @@ class DemoSpider(scrapy.Spider):
             # Init file to write
             clear_file(book[SHORT_NAME])
             file = append_file(book[SHORT_NAME])
-            # Add file writer to list
-            file_list[book[SHORT_NAME]] = file
             # Write file header with book name and author
             file.write(BOOK_HEADER.format(book[FULL_NAME], book[AUTHOR]))
 
             yield scrapy.Request(
                 url=BASE_URL.format(book[SHORT_NAME]),
                 callback=self.parse,
-                meta={SHORT_NAME: book[SHORT_NAME]}
+                cb_kwargs=dict(file=file)
             )
 
-    def parse(self, response: scrapy.http.response.Response):
-        # Get file write from list
-        short_name = response.meta[SHORT_NAME]
-        file = file_list[short_name]
-
+    def parse(self, response: scrapy.http.response.Response, file):
         # Get chapter data using ItemLoader
         loader = ItemLoader(item=Chapter(), response=response)
         loader.add_xpath(TITLE_INDEX, TITLE_INDEX_PATH)
@@ -55,11 +49,7 @@ class DemoSpider(scrapy.Spider):
             yield scrapy.Request(
                 url=next_chapter_url,
                 callback=self.parse,
-                meta={SHORT_NAME: short_name}
+                cb_kwargs=dict(file=file)
             )
-
-    @staticmethod
-    def close(spider, reason):
-        for file in file_list.values():
+        else:
             file.close()
-        return super().close(spider, reason)

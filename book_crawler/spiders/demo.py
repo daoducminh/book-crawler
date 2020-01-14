@@ -3,9 +3,9 @@ import scrapy
 from scrapy.loader import ItemLoader
 
 from book_crawler.items import Chapter
-from book_crawler.utilities.books.book_list import BOOK_LIST
-from book_crawler.utilities.books.chapter_utilities import append_file, clear_file
-from book_crawler.utilities.books.constants import *
+from utilities.books.book_list import BOOK_LIST
+from utilities.books.chapter_utilities import append_file, clear_file
+from utilities.books.constants import *
 
 file_list = {}
 

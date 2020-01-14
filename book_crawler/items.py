@@ -9,7 +9,7 @@ import scrapy
 from scrapy.loader.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
-from book_crawler.utilities.books.chapter_utilities import *
+from utilities.books.chapter_utilities import get_title_content, get_title_index, reformat_chapter_content
 
 
 class Chapter(scrapy.Item):

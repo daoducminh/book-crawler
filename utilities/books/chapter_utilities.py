@@ -2,7 +2,7 @@ import codecs
 import os
 import re
 
-from book_crawler.utilities.books.constants import BOOK_HEADER, FILE_NAME
+from utilities.books.constants import BOOK_HEADER, FILE_NAME
 
 
 def get_title_index(text):

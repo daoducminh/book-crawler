@@ -4,7 +4,8 @@ SHORT_NAME = 'short_name'
 AUTHOR = 'author'
 
 # Common variables
-BASE_URL = 'https://truyenyy.com/truyen/{0}/chuong-1.html'
+BASE_URL = 'https://truyenyy.com/truyen/{}'
+FIRST_CHAPTER_URL = 'https://truyenyy.com/truyen/{0}/chuong-1.html'
 TITLE_INDEX = 'title_index'
 TITLE_CONTENT = 'title_content'
 CONTENT = 'content'
@@ -31,6 +32,8 @@ RAW_GIST_PATH = "(//div[@class='file-actions']/a)[1]/@href"
 # CSS selector
 TITLE_CONTENT_PATH = '.chapter-title'
 CONTENT_PATH = '.inner'
+BOOK_FULL_NAME_PATH = 'h1.name::text'
+BOOK_AUTHOR_PATH = 'div.author > a::text'
 
 # Book list's url
 BOOK_LIST_GIST = 'https://gist.githubusercontent.com/zeratul0097/4df725ee5e50843f6745ccbf8791d423'

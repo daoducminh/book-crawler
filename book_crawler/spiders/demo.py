@@ -19,7 +19,7 @@ class DemoSpider(scrapy.Spider):
             callback=self.parse
         )
 
-    def parse(self, response):
+    def parse(self, response: scrapy.http.response.Response):
         raw_url = response.xpath(RAW_GIST_PATH).get()
 
         # Get book_list.json from gist
@@ -28,7 +28,7 @@ class DemoSpider(scrapy.Spider):
             callback=self.parse_book_list
         )
 
-    def parse_book_list(self, response):
+    def parse_book_list(self, response: scrapy.http.response.Response):
         book_list = json.loads(response.body, encoding='utf-8')
 
         if book_list:
@@ -45,7 +45,7 @@ class DemoSpider(scrapy.Spider):
                     cb_kwargs=dict(file=file)
                 )
 
-    def parse_chapter(self, response, file):
+    def parse_chapter(self, response: scrapy.http.response.Response, file):
         # Get chapter data using ItemLoader
         loader = ItemLoader(item=Chapter(), response=response)
         loader.add_xpath(TITLE_INDEX, TITLE_INDEX_PATH)

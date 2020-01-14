@@ -3,29 +3,30 @@ import scrapy
 from scrapy.loader import ItemLoader
 
 from book_crawler.items import Chapter
-from utilities.books.book_list import BOOK_LIST
-from utilities.books.chapter_utilities import append_file, clear_file
+from utilities.books.chapter_utilities import append_file, clear_file, get_book_list
 from utilities.books.constants import *
-
-file_list = {}
 
 
 class DemoSpider(scrapy.Spider):
     name = 'demo'
 
     def start_requests(self):
-        for book in BOOK_LIST:
-            # Init file to write
-            clear_file(book[SHORT_NAME])
-            file = append_file(book[SHORT_NAME])
-            # Write file header with book name and author
-            file.write(BOOK_HEADER.format(book[FULL_NAME], book[AUTHOR]))
+        # Get book list from gist
+        book_list = get_book_list()
 
-            yield scrapy.Request(
-                url=BASE_URL.format(book[SHORT_NAME]),
-                callback=self.parse,
-                cb_kwargs=dict(file=file)
-            )
+        if book_list:
+            for book in book_list:
+                # Init file to write
+                clear_file(book[SHORT_NAME])
+                file = append_file(book[SHORT_NAME])
+                # Write file header with book name and author
+                file.write(BOOK_HEADER.format(book[FULL_NAME], book[AUTHOR]))
+
+                yield scrapy.Request(
+                    url=BASE_URL.format(book[SHORT_NAME]),
+                    callback=self.parse,
+                    cb_kwargs=dict(file=file)
+                )
 
     def parse(self, response: scrapy.http.response.Response, file):
         # Get chapter data using ItemLoader

@@ -1,3 +1,5 @@
 .idea/
 *.md
 !README.md
+/project.egg-info/
+/build/

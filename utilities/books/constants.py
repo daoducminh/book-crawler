@@ -23,11 +23,14 @@ DOCX_EPUB = 'ebook-convert {0}.docx {0}.epub'
 # Ebook metadata edit commands
 METADATA = 'ebook-meta {2}.{3} -t "{0}" -a "{1}"'
 
-# Chapter selector's path
+# XPath selector
 TITLE_INDEX_PATH = "//li[@class='breadcrumb-item active']"
+NEXT_CHAPTER_PATH = "//*[contains(text(),'Chương Tiếp Theo')]/@href"
+RAW_GIST_PATH = "(//div[@class='file-actions']/a)[1]/@href"
+
+# CSS selector
 TITLE_CONTENT_PATH = '.chapter-title'
 CONTENT_PATH = '.inner'
-NEXT_CHAPTER_PATH = "//*[contains(text(),'Chương Tiếp Theo')]/@href"
 
 # Book list's url
-BOOK_LIST_URL = 'https://gist.githubusercontent.com/zeratul0097/4df725ee5e50843f6745ccbf8791d423/raw/39ed45f2de574ddaf4b83f8ce5b0be5f71e14c67/book_list.json'
+BOOK_LIST_GIST = 'https://gist.githubusercontent.com/zeratul0097/4df725ee5e50843f6745ccbf8791d423'

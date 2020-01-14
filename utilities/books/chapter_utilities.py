@@ -1,11 +1,8 @@
 import codecs
-import json
 import os
 import re
 
-import requests
-
-from utilities.books.constants import BOOK_HEADER, FILE_NAME, BOOK_LIST_URL
+from utilities.books.constants import BOOK_HEADER, FILE_NAME
 
 
 def get_title_index(text):
@@ -50,7 +47,3 @@ def reformat_chapter_content(text):
         del arr[0]
     return arr
 
-
-def get_book_list():
-    response = requests.get(BOOK_LIST_URL)
-    return json.loads(response.content, encoding='utf-8')

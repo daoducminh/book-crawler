@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import json
+
 import scrapy
 from scrapy.loader import ItemLoader
 
 from book_crawler.items import Chapter
-from utilities.books.chapter_utilities import append_file, clear_file, get_book_list
+from utilities.books.chapter_utilities import append_file, clear_file
 from utilities.books.constants import *
 
 
@@ -11,8 +13,23 @@ class DemoSpider(scrapy.Spider):
     name = 'demo'
 
     def start_requests(self):
-        # Get book list from gist
-        book_list = get_book_list()
+        # Get book-list from gist
+        yield scrapy.Request(
+            url=BOOK_LIST_GIST,
+            callback=self.parse
+        )
+
+    def parse(self, response: scrapy.http.response.Response):
+        raw_url = response.xpath(RAW_GIST_PATH).get()
+
+        # Get book_list.json from gist
+        yield scrapy.Request(
+            url=response.urljoin(raw_url),
+            callback=self.parse_book_list
+        )
+
+    def parse_book_list(self, response: scrapy.http.response.Response):
+        book_list = json.loads(response.body, encoding='utf-8')
 
         if book_list:
             for book in book_list:
@@ -24,11 +41,11 @@ class DemoSpider(scrapy.Spider):
 
                 yield scrapy.Request(
                     url=BASE_URL.format(book[SHORT_NAME]),
-                    callback=self.parse,
+                    callback=self.parse_chapter,
                     cb_kwargs=dict(file=file)
                 )
 
-    def parse(self, response: scrapy.http.response.Response, file):
+    def parse_chapter(self, response: scrapy.http.response.Response, file):
         # Get chapter data using ItemLoader
         loader = ItemLoader(item=Chapter(), response=response)
         loader.add_xpath(TITLE_INDEX, TITLE_INDEX_PATH)
@@ -49,7 +66,7 @@ class DemoSpider(scrapy.Spider):
             next_chapter_url = response.urljoin(next_chapter)
             yield scrapy.Request(
                 url=next_chapter_url,
-                callback=self.parse,
+                callback=self.parse_chapter,
                 cb_kwargs=dict(file=file)
             )
         else:

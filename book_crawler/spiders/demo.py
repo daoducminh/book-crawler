@@ -6,9 +6,9 @@ from scrapy import Request
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
-from book_crawler.items import Chapter, BookInfo
-from utilities.books.chapter_utilities import append_file, clear_file
+from utilities.books.chapter_utilities import write_file
 from utilities.books.constants import *
+from utilities.items.chapter import Chapter, BookInfo
 
 
 class DemoSpider(scrapy.Spider):
@@ -53,20 +53,30 @@ class DemoSpider(scrapy.Spider):
         full_name = page.get(FULL_NAME)
         author = page.get(AUTHOR)
 
+        # Initial crawling
+        book_index = 1
+        number_of_chapter = 1
+
         # Initial file to write
-        clear_file(short_name)
-        file = append_file(short_name)
+        file = write_file(short_name, book_index)
         # Write file header with book name and author
-        file.write(BOOK_HEADER.format(full_name, author))
+        file.write(BOOK_HEADER.format(full_name, book_index, author))
         # print(full_name, author)
 
         yield Request(
             url=FIRST_CHAPTER_URL.format(short_name),
             callback=self.parse_chapter,
-            cb_kwargs=dict(file=file)
+            cb_kwargs=dict(
+                file=file,
+                short_name=short_name,
+                full_name=full_name,
+                author=author,
+                book_index=book_index,
+                number_of_chapter=number_of_chapter
+            )
         )
 
-    def parse_chapter(self, response: Response, file):
+    def parse_chapter(self, response: Response, file, short_name, full_name, author, book_index, number_of_chapter):
         # Get chapter data using ItemLoader
         loader = ItemLoader(item=Chapter(), response=response)
         # Find elements
@@ -83,13 +93,31 @@ class DemoSpider(scrapy.Spider):
         file.write(EPISODE_HEADER.format(page.get(TITLE_INDEX), page.get(TITLE_CONTENT)))
         file.write(page.get(CONTENT))
 
+        number_of_chapter += 1
+        if number_of_chapter > MAX_CHAPTERS_PER_BOOK:
+            # Close previous
+            file.close()
+            book_index += 1
+            # Reset counter
+            number_of_chapter = 1
+            # Initial next book
+            file = write_file(short_name, book_index)
+            file.write(BOOK_HEADER.format(full_name, book_index, author))
+
         # Crawling next chapter
         if next_chapter:
             next_chapter_url = response.urljoin(next_chapter)
             yield Request(
                 url=next_chapter_url,
                 callback=self.parse_chapter,
-                cb_kwargs=dict(file=file)
+                cb_kwargs=dict(
+                    file=file,
+                    short_name=short_name,
+                    full_name=full_name,
+                    author=author,
+                    book_index=book_index,
+                    number_of_chapter=number_of_chapter
+                )
             )
         else:
             file.close()

@@ -1,5 +1,4 @@
 import codecs
-import os
 import re
 
 from utilities.books.constants import BOOK_HEADER, FILE_NAME
@@ -17,14 +16,8 @@ def print_book_header(file, book_name):
     file.write(BOOK_HEADER.format(book_name))
 
 
-def append_file(short_name):
-    return codecs.open(FILE_NAME.format(short_name), 'a', 'utf-8')
-
-
-def clear_file(short_name):
-    file_name = FILE_NAME.format(short_name)
-    if os.path.exists(file_name):
-        os.remove(file_name)
+def write_file(short_name, book_index):
+    return codecs.open(FILE_NAME.format(short_name, book_index), 'w', 'utf-8')
 
 
 def remove_text_from_paragraph(text, paragraph):

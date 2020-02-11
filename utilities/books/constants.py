@@ -10,10 +10,10 @@ TITLE_INDEX = 'title_index'
 TITLE_CONTENT = 'title_content'
 CONTENT = 'content'
 NEXT_CHAPTER = 'next_chapter'
-BOOK_HEADER = '# **{0} - {1}**\n\nTác giả: **{2}**\n\n---'
-FILE_NAME = '{0}-{1}.md'
-EPISODE_HEADER = '\n\n## Chương {0}: {1} {{#chuong-{0}}}\n\n'
-MAX_CHAPTERS_PER_BOOK = 1000
+BOOK_HEADER = '# **{0}**\n\nTác giả: **{1}**\n\n---'
+FILE_NAME = '{}.md'
+EPISODE_HEADER = '\n\n## Chương {0}: {1}\n\n'
+AZW3 = 'azw3'
 
 # XPath selector
 TITLE_INDEX_PATH = "//li[@class='breadcrumb-item active']"

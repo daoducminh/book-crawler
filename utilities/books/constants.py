@@ -12,17 +12,8 @@ CONTENT = 'content'
 NEXT_CHAPTER = 'next_chapter'
 BOOK_HEADER = '# **{0}**\n\nTác giả: **{1}**\n\n---'
 FILE_NAME = '{}.md'
-EBOOK_NAME = '{}.docx'
-EPISODE_HEADER = '\n\n## Chương {0}: {1} {{#chuong-{0}}}\n\n'
+EPISODE_HEADER = '\n\n## Chương {0}: {1}\n\n'
 AZW3 = 'azw3'
-
-# Ebook convert commands
-MD_DOCX = 'pandoc -o {0} -f markdown-yaml_metadata_block -t docx {1}'
-DOCX_AZW3 = 'ebook-convert {0}.docx {0}.azw3'
-DOCX_EPUB = 'ebook-convert {0}.docx {0}.epub'
-
-# Ebook metadata edit commands
-METADATA = 'ebook-meta {2}.{3} -t "{0}" -a "{1}"'
 
 # XPath selector
 TITLE_INDEX_PATH = "//li[@class='breadcrumb-item active']"

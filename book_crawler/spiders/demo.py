@@ -6,6 +6,7 @@ from scrapy import Request
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
+from book_list import book_list
 from book_crawler.items import Chapter, BookInfo
 from utilities.books.chapter_utilities import append_file, clear_file
 from utilities.books.constants import *
@@ -15,30 +16,12 @@ class DemoSpider(scrapy.Spider):
     name = 'demo'
 
     def start_requests(self):
-        # Get book-list from gist
-        yield Request(
-            url=BOOK_LIST_GIST,
-            callback=self.parse
-        )
-
-    def parse(self, response: Response):
-        raw_url = response.xpath(RAW_GIST_PATH).get()
-
-        # Get book_list.json from gist
-        yield Request(
-            url=response.urljoin(raw_url),
-            callback=self.parse_book_list
-        )
-
-    def parse_book_list(self, response: scrapy.http.response.Response):
-        book_list = json.loads(response.body, encoding='utf-8')
-
         if book_list:
             for book in book_list:
                 yield Request(
-                    url=BASE_URL.format(book[SHORT_NAME]),
+                    url=BASE_URL.format(book),
                     callback=self.parse_book_info,
-                    cb_kwargs=dict(short_name=book[SHORT_NAME])
+                    cb_kwargs=dict(short_name=book)
                 )
 
     def parse_book_info(self, response: Response, short_name):

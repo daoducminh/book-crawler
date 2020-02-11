@@ -3,3 +3,6 @@
 !README.md
 /project.egg-info/
 /build/
+book_list.py
+test.py
+__pycache__/

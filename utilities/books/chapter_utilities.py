@@ -5,12 +5,14 @@ import re
 from utilities.books.constants import BOOK_HEADER, FILE_NAME
 
 
-def get_title_index(text):
+def get_title_index(text: str):
     return text.split(' ')[-1]
 
 
-def get_title_content(text):
-    return re.split('[:?]', text)[-1].strip()
+def get_title_content(text: str):
+    text = text.replace(':', '')
+    text = re.sub('[Cc]hương *\\d*', '', text)
+    return text.strip()
 
 
 def print_book_header(file, book_name):
@@ -46,4 +48,3 @@ def reformat_chapter_content(text):
     if arr[0] == '':
         del arr[0]
     return arr
-

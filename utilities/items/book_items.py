@@ -18,9 +18,6 @@ class Chapter(Item):
         input_processor=MapCompose(remove_tags, reformat_chapter_content),
         output_processor=Join('\n\n')
     )
-    next_chapter = Field(
-        output_processor=Join()
-    )
 
 
 class BookInfo(Item):

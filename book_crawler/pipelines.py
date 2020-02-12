@@ -10,21 +10,6 @@ import pymongo
 from utilities.books.constants import *
 
 
-class JsonWriterPipeline(object):
-    file = None
-
-    def open_spider(self, spider):
-        self.file = open('items.txt', 'w')
-
-    def close_spider(self, spider):
-        self.file.close()
-
-    def process_item(self, item, spider):
-        self.file.write(item['title_content'] + '\n\n')
-        self.file.write(item['content'] + '\n\n')
-        return item
-
-
 class MongoPipeline(object):
     def __init__(self):
         self.collection_name = None

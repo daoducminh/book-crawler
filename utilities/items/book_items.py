@@ -2,7 +2,7 @@ from scrapy import Item, Field
 from scrapy.loader.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
-from utilities.books.chapter_utilities import get_title_content, get_title_index, reformat_chapter_content
+from utilities.books.chapter_utilities import *
 
 
 class Chapter(Item):
@@ -30,5 +30,9 @@ class BookInfo(Item):
     )
     author = Field(
         input_processor=MapCompose(str.strip),
+        output_processor=Join()
+    )
+    last_chapter = Field(
+        input_processor=MapCompose(get_last_chapter),
         output_processor=Join()
     )

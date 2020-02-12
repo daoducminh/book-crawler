@@ -18,8 +18,8 @@ def print_book_header(file, book_name):
     file.write(BOOK_HEADER.format(book_name))
 
 
-def write_file(short_name, book_index):
-    return codecs.open(FILE_NAME.format(short_name, book_index), 'w', 'utf-8')
+def write_file(short_name):
+    return codecs.open(FILE_NAME.format(short_name), 'w', 'utf-8')
 
 
 def remove_text_from_paragraph(text, paragraph):
@@ -41,3 +41,7 @@ def reformat_chapter_content(text):
     if arr[0] == '':
         del arr[0]
     return arr
+
+
+def get_last_chapter(text):
+    return re.split('[.\\-]', text)[-2]

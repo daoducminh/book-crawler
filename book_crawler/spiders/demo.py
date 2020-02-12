@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 
 import scrapy
 from scrapy import Request
@@ -7,9 +6,9 @@ from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
 from book_list import book_list
-from book_crawler.items import Chapter, BookInfo
 from utilities.books.chapter_utilities import append_file, clear_file
 from utilities.books.constants import *
+from utilities.items.book_items import Chapter, BookInfo
 
 
 class DemoSpider(scrapy.Spider):

@@ -6,7 +6,7 @@ from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
 from book_list import book_list
-from utilities.books.chapter_utilities import append_file, clear_file
+from utilities.books.chapter_utilities import write_file
 from utilities.books.constants import *
 from utilities.items.book_items import Chapter, BookInfo
 
@@ -36,8 +36,7 @@ class DemoSpider(scrapy.Spider):
         author = page.get(AUTHOR)
 
         # Initial file to write
-        clear_file(short_name)
-        file = append_file(short_name)
+        file = write_file(short_name)
         # Write file header with book name and author
         file.write(BOOK_HEADER.format(full_name, author))
         # print(full_name, author)

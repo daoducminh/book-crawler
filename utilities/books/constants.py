@@ -30,4 +30,4 @@ BOOK_FULL_NAME_PATH = 'h1.name::text'
 BOOK_AUTHOR_PATH = 'div.author > a::text'
 
 # Book list's url
-BOOK_LIST_GIST = 'https://gist.githubusercontent.com/zeratul0097/4df725ee5e50843f6745ccbf8791d423'
+BOOK_LIST_URL = 'https://raw.githubusercontent.com/zeratul0097/configurations/master/book_list.json'

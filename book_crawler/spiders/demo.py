@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import json
 from scrapy import Request
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
@@ -19,6 +20,14 @@ class DemoSpider(scrapy.Spider):
     }
 
     def start_requests(self):
+        yield Request(
+            url=BOOK_LIST_URL,
+            callback=self.parse_book_list
+        )
+
+    def parse_book_list(self, response: Response):
+        book_list = json.loads(response.text)
+
         if book_list:
             for book in book_list:
                 yield Request(

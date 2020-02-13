@@ -7,7 +7,7 @@
 
 import pymongo
 
-from utilities.books.constants import *
+from utilities.books.constants import SHORT_NAME
 
 
 class MongoPipeline(object):
@@ -33,6 +33,7 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        temp = dict((k, item[k]) for k in item if k != SHORT_NAME)
-        self.db[item[SHORT_NAME]].insert_one(temp)
+        short_name = item[SHORT_NAME]
+        del item[SHORT_NAME]
+        self.db[short_name].update_one(item, {'$set': item}, upsert=True)
         return item

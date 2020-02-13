@@ -39,21 +39,22 @@ class DemoSpider(scrapy.Spider):
         page = loader.load_item()
         full_name = page.get(FULL_NAME)
         author = page.get(AUTHOR)
-        last_chapter = page.get(LAST_CHAPTER)
+        last_chapter = int(page.get(LAST_CHAPTER))
 
-        yield {
-            SHORT_NAME: short_name,
-            FULL_NAME: full_name,
-            AUTHOR: author,
-            LAST_CHAPTER: last_chapter
-        }
-
-        for i in range(1, last_chapter + 1):
-            yield Request(
-                url=CHAPTER_URL.format(short_name, i),
-                callback=self.parse_chapter,
-                cb_kwargs=dict(short_name=short_name)
-            )
+        for i in range(last_chapter, -1, -1):
+            if i == 0:
+                yield {
+                    SHORT_NAME: short_name,
+                    FULL_NAME: full_name,
+                    AUTHOR: author,
+                    LAST_CHAPTER: last_chapter
+                }
+            else:
+                yield Request(
+                    url=CHAPTER_URL.format(short_name, i),
+                    callback=self.parse_chapter,
+                    cb_kwargs=dict(short_name=short_name)
+                )
 
     def parse_chapter(self, response: Response, short_name):
         # Get chapter data using ItemLoader

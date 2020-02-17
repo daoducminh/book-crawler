@@ -33,7 +33,6 @@ ROBOTSTXT_OBEY = False
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
-LOG_ENABLED = False
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
 

@@ -16,17 +16,10 @@ class DemoSpider(scrapy.Spider):
         'ITEM_PIPELINES': {
             'book_crawler.pipelines.MongoPipeline': 1,
         },
-        'LOG_ENABLED': True,
-        'COOKIES_ENABLED': True,
+        'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
-            'accept': 'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'accept-language': 'vi,en-US;q=0.9,en;q=0.8',
-            'accept-encoding': 'gzip, deflate, br',
-            'cookie': '_ga=GA1.2.465337527.1578842728; csrftoke-n=DmTnac3Gk2mG1yhZJbrIfsEoDvIYWoLtdUUiiH8ljvSqMyqjV7RHzNVI0L6LzUHp; truyenyy_sessionid=mux1i30szj759myq7dsitbv8rz6rhxqi; __cfduid=dfb4f87012c9333bb95b45e507494e06d1581581805; _gid=GA1.2.1298720373.1581907889; _gat=1',
-            ':authority': 'truyenyy.com',
-            ':method': 'GET',
-            ':path': '/',
-            ':scheme': 'https'
+            'accept': '*/*',
+            'cookie': '_ga=GA1.2.465337527.1578842728; csrftoken=DmTnac3Gk2mG1yhZJbrIfsEoDvIYWoLtdUUiiH8ljvSqMyqjV7RHzNVI0L6LzUHp; truyenyy_sessionid=mux1i30szj759myq7dsitbv8rz6rhxqi; __cfduid=dfb4f87012c9333bb95b45e507494e06d1581581805; _gid=GA1.2.1298720373.1581907889',
         }
     }
 
@@ -52,7 +45,7 @@ class DemoSpider(scrapy.Spider):
         author = page.get(AUTHOR)
         last_chapter = int(page.get(LAST_CHAPTER))
 
-        for i in range(4, -1, -1):
+        for i in range(last_chapter, -1, -1):
             if i == 0:
                 yield {
                     SHORT_NAME: short_name,

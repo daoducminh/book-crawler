@@ -7,7 +7,7 @@
 
 import pymongo
 
-from utilities.books.constants import SHORT_NAME
+from utilities.books.constants import SHORT_NAME, TITLE_INDEX
 
 
 class MongoPipeline(object):
@@ -35,5 +35,8 @@ class MongoPipeline(object):
     def process_item(self, item, spider):
         short_name = item[SHORT_NAME]
         del item[SHORT_NAME]
-        self.db[short_name].update_one(item, {'$set': item}, upsert=True)
+        if TITLE_INDEX in item:
+            self.db[short_name].update_one({TITLE_INDEX: item[TITLE_INDEX]}, {'$set': item}, upsert=True)
+        else:
+            self.db[short_name].update_one(item, {'$set': item}, upsert=True)
         return item

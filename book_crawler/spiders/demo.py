@@ -19,7 +19,7 @@ class DemoSpider(scrapy.Spider):
         'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*',
-            'cookie': '_ga=GA1.2.465337527.1578842728; csrftoken=DmTnac3Gk2mG1yhZJbrIfsEoDvIYWoLtdUUiiH8ljvSqMyqjV7RHzNVI0L6LzUHp; truyenyy_sessionid=mux1i30szj759myq7dsitbv8rz6rhxqi; __cfduid=dfb4f87012c9333bb95b45e507494e06d1581581805; _gid=GA1.2.1298720373.1581907889',
+            'cookie': '__cfduid=de95d4341c7c8c6c5257bfa579a5e5e271584092018; csrftoken=otEAQgiYz4p4nHqJQX3da35G9iGEUed9hJ7VEMBK0FBN7ShBTKwiGvgi0eqdVbZy; truyenyy_sessionid=4n4h9crk9r8mg5xu6gmg2mvgkx6ptmff',
         }
     }
 

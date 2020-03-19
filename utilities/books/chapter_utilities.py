@@ -37,7 +37,7 @@ def reformat_chapter_content(text):
     if re.search('Chương [0-9]+ *::', arr[0]):
         arr = arr[1:]
     # Remove credit and ads
-    arr[0] = remove_text_from_paragraph(ADS_PATTERN, arr[0])
+    arr[0] = remove_text_from_paragraph('Người đăng:.+', arr[0])
     if arr[0] == '':
         del arr[0]
     return arr

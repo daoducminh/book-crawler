@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import scrapy
-from scrapy import Request
+from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
@@ -10,7 +9,7 @@ from utilities.books.yy_constants import *
 from utilities.items.book_items import Chapter, BookInfo
 
 
-class DemoSpider(scrapy.Spider):
+class DemoSpider(Spider):
     name = 'demo'
 
     custom_settings = {
@@ -71,10 +70,11 @@ class DemoSpider(scrapy.Spider):
 
         # Extracting data
         page = loader.load_item()
-
-        yield {
-            SHORT_NAME: short_name,
-            TITLE_INDEX: int(page.get(TITLE_INDEX)),
-            TITLE_CONTENT: page.get(TITLE_CONTENT),
-            CONTENT: page.get(CONTENT)
-        }
+        content = page.get(CONTENT)
+        if content:
+            yield {
+                SHORT_NAME: short_name,
+                TITLE_INDEX: int(page.get(TITLE_INDEX)),
+                TITLE_CONTENT: page.get(TITLE_CONTENT),
+                CONTENT: content
+            }

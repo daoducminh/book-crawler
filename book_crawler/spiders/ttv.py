@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import scrapy
-from scrapy import Request
+from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
@@ -10,7 +9,7 @@ from utilities.books.ttv_constants import *
 from utilities.items.book_items import TtvChapter, TtvBookInfo
 
 
-class TtvSpider(scrapy.Spider):
+class TtvSpider(Spider):
     name = 'ttv'
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -19,8 +18,13 @@ class TtvSpider(scrapy.Spider):
         'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*',
-            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
-        }
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+            'content-type': 'text/html; charset=UTF-8',
+            'connection': 'keep-alive',
+            'upgrade-insecure-requests': 1,
+            'accept-encoding': 'gzip, deflate, br'
+        },
+        'RETRY_TIMES': 50
     }
 
     def start_requests(self):
@@ -69,10 +73,11 @@ class TtvSpider(scrapy.Spider):
 
         # Extracting data
         page = loader.load_item()
-
-        yield {
-            SHORT_NAME: short_name,
-            TITLE_INDEX: title_index,
-            TITLE_CONTENT: page.get(TITLE_CONTENT),
-            CONTENT: page.get(CONTENT)
-        }
+        content = page.get(CONTENT)
+        if content:
+            yield {
+                SHORT_NAME: short_name,
+                TITLE_INDEX: title_index,
+                TITLE_CONTENT: page.get(TITLE_CONTENT),
+                CONTENT: content
+            }

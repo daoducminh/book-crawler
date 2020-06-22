@@ -33,3 +33,55 @@ class BookInfo(Item):
         input_processor=MapCompose(get_last_chapter),
         output_processor=Join()
     )
+
+
+class TtvBookInfo(Item):
+    full_name = Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join()
+    )
+    author = Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join()
+    )
+    last_chapter = Field(
+        input_processor=MapCompose(remove_tags, get_ttv_last_chapter),
+        output_processor=Join()
+    )
+
+
+class TtvChapter(Item):
+    title_content = Field(
+        input_processor=MapCompose(remove_tags, get_title_content),
+        output_processor=Join()
+    )
+    content = Field(
+        input_processor=MapCompose(remove_tags, reformat_ttv_chapter_content),
+        output_processor=Join('\n\n')
+    )
+
+
+class TcvBookInfo(Item):
+    full_name = Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join()
+    )
+    author = Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join()
+    )
+    last_chapter = Field(
+        input_processor=MapCompose(remove_tags, get_ttv_last_chapter),
+        output_processor=Join()
+    )
+
+
+class TcvChapter(Item):
+    title_content = Field(
+        input_processor=MapCompose(remove_tags, get_title_content),
+        output_processor=Join()
+    )
+    content = Field(
+        input_processor=MapCompose(remove_tags, reformat_ttv_chapter_content),
+        output_processor=Join('\n\n')
+    )

@@ -1,23 +1,33 @@
 # Book Crawler Project
 
 ## Installation
-1. Install Python 3
-2. Install `pip`
-3. Install `bs4` and `scrapy` from `pip`
+1. Install Python 3.
+2. Install Python virtualenv.
+3. Create virtual environment for project: `virtualenv .virtualenvs`
+4. Install required packages: `.virtualenvs/bin/python -m pip install .`
+5. Install MongoDB.
 
-## Running
+## Usage
 
-> `scrapy crawl <SPIDER>`
-
-For example: `scrapy crawl demo`
-
-## Debugging
-
-- If you're using PyCharm, please follow this steps:
-  1. Open **Run > Edit Configuration**
-  2. Add new configuration for Pure Python
-  3. In **Configuration** tab, choose *Module name* and fill it with `scrapy.cmdline`
-  4. Set parameters as your commands. For example: if you want to run: `scrapy crawl demo`, you will set it with:
-     > crawl demo
-  5. Set **Working Directory** as your project's root path.
-  6. Save it and enjoys.
+1. Start MongoDB. Create database `scrapy`
+2. Create `.env` file with configurations. For example:
+   ```
+   MONGODB_URI=mongodb://localhost:27017/
+   MONGODB_DATABASE=scrapy
+   ```
+3. Create book list to crawl. For example, create `book_list.py` with:
+   ```python
+   book_list = [
+      'dau-pha-thuong-khung',
+      'nhat-niem-vinh-hang-dich'
+   ]
+   ```
+   Books in book list have been extracted from `truyenyy`'s url. For example:
+   ```
+   https://truyenyy.com/truyen/dau-pha-thuong-khung/
+   https://truyenyy.com/truyen/nhat-niem-vinh-hang-dich/
+   ```
+4. Start crawling: `.virtualenvs/bin/python -m scrapy crawl demo`
+5. After crawling, create HTML ebook: `.virtualenvs/bin/python create_html_ebook.py`
+6. Convert HTML ebook to AZW3 ebook: `.virtualenvs/bin/python convert_ebook.py`
+7. All HTML and AZW3 books will appear in `books` folder.

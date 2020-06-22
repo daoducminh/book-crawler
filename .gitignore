@@ -6,3 +6,5 @@
 book_list*.py
 test.py
 __pycache__/
+.vscode/
+.env

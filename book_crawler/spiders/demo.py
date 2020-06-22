@@ -18,8 +18,7 @@ class DemoSpider(Spider):
         },
         'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
-            'accept': '*/*',
-            'cookie': '__cfduid=de95d4341c7c8c6c5257bfa579a5e5e271584092018; csrftoken=otEAQgiYz4p4nHqJQX3da35G9iGEUed9hJ7VEMBK0FBN7ShBTKwiGvgi0eqdVbZy; truyenyy_sessionid=4n4h9crk9r8mg5xu6gmg2mvgkx6ptmff',
+            'accept': '*/*'
         }
     }
 

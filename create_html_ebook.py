@@ -1,7 +1,8 @@
 import os
+import sys
 import pymongo
 from dotenv import load_dotenv
-from book_lists.book_list_tfull import book_list
+from book_lists.source_picker import select_source
 
 load_dotenv(dotenv_path='.env')
 
@@ -18,13 +19,13 @@ LAST_CHAPTER = 'last_chapter'
 FILE_FORMAT = '<html>\n<head>\n{0}\n</head>\n<body>\n{1}</body>\n</html>'
 BOOK_HEADER = '<title>{0}</title>\n<meta name="author" content="{1}">'
 # CHAPTER = '\n\n## Chương {0}: {1}\n\n{2}'
-CHAPTER = '<h2 title="{0}">Chương {0}: {1}</h2>\n<div>{2}</div>\n'
+CHAPTER = '<h1 title="{0}">Chương {0}: {1}</h1>\n<div>{2}</div>\n'
 HTML_FILE = 'books/{}.html'
 FIELD_EXSITED = {'$exists': True}
 CHAPTERS_PER_PART = 1000
 
 
-def main():
+def create_html_ebook(book_list):
     client = pymongo.MongoClient(DATABASE_URI)
     db = client[DATABASE_NAME]
 
@@ -64,4 +65,12 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) == 2:
+        book_source = sys.argv[1]
+        book_list = select_source(book_source)
+        if book_list:
+            create_html_ebook(book_list)
+        else:
+            print('Invalid book source.')
+    else:
+        print('Invalid arguments')

@@ -41,7 +41,7 @@ def create_html_ebook(book_list):
         body = ''
         last_chapter = header[LAST_CHAPTER]
         remainder = last_chapter % CHAPTERS_PER_PART
-        max_parts = last_chapter//CHAPTERS_PER_PART
+        max_parts = last_chapter // CHAPTERS_PER_PART
         if remainder != 0:
             max_parts = max_parts + 1
 

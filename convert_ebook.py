@@ -5,7 +5,7 @@ from book_lists.source_picker import select_source
 
 FILENAME = '{}.html'
 # Ebook convert commands
-HTML_AZW3 = 'ebook-convert books/{0}.html books/{0}.azw3 --no-inline-toc'
+HTML_AZW3 = 'tsp ebook-convert books/{0}.html books/{0}.azw3 --no-inline-toc'
 
 
 def convert(book_list):

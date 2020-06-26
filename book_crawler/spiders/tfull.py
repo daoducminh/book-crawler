@@ -18,7 +18,7 @@ class TfullSpider(Spider):
         'ITEM_PIPELINES': {
             'book_crawler.pipelines.MongoPipeline': 1,
         },
-        # 'LOG_ENABLED': False,
+        'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*'
         }

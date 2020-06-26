@@ -9,6 +9,8 @@ from utilities.constants.common_constants import *
 from utilities.constants.tfull_constants import *
 from utilities.items.tfull_book_items import Chapter, BookInfo
 
+MAX_TRY = 1
+
 
 class TfullSpider(Spider):
     name = 'tfull'
@@ -53,7 +55,6 @@ class TfullSpider(Spider):
         author = page.get(AUTHOR)
         last_chapter = int(page.get(LAST_CHAPTER))
 
-        print(full_name, author, last_chapter)
         for i in range(last_chapter, -1, -1):
             if i == 0:
                 yield {
@@ -63,26 +64,50 @@ class TfullSpider(Spider):
                     LAST_CHAPTER: last_chapter
                 }
             else:
+                chapter_url = CHAPTER_URL.format(short_name, i)
                 yield Request(
-                    url=CHAPTER_URL.format(short_name, i),
+                    url=chapter_url,
                     callback=self.parse_chapter,
-                    cb_kwargs=dict(short_name=short_name, chapter_index=i)
+                    cb_kwargs=dict(
+                        short_name=short_name,
+                        chapter_index=i,
+                        chapter_url=chapter_url,
+                        count=0
+                    ),
+                    dont_filter=True
                 )
 
-    def parse_chapter(self, response: Response, short_name, chapter_index):
-        # Get chapter data using ItemLoader
-        loader = ItemLoader(item=Chapter(), response=response)
-        # Find elements
-        loader.add_css(TITLE_CONTENT, TITLE_CONTENT_PATH)
-        loader.add_css(CONTENT, CONTENT_PATH)
+    def parse_chapter(self, response: Response, short_name, chapter_index, chapter_url, count):
+        if count <= MAX_TRY:
+            count = count + 1
+            if chapter_url != response.request.url:
+                chapter_url = CHAPTER_URL.format(
+                    short_name, f'{"0"*count}{chapter_index}'
+                )
+                yield Request(
+                    url=chapter_url,
+                    callback=self.parse_chapter,
+                    cb_kwargs=dict(
+                        short_name=short_name,
+                        chapter_index=chapter_index,
+                        chapter_url=chapter_url,
+                        count=count
+                    ),
+                    dont_filter=True
+                )
+            else:
+                # Get chapter data using ItemLoader
+                loader = ItemLoader(item=Chapter(), response=response)
+                # Find elements
+                loader.add_css(TITLE_CONTENT, TITLE_CONTENT_PATH)
+                loader.add_css(CONTENT, CONTENT_PATH)
 
-        # Extracting data
-        page = loader.load_item()
-        content = page.get(CONTENT)
-        if content:
-            yield {
-                SHORT_NAME: short_name,
-                TITLE_INDEX: chapter_index,
-                TITLE_CONTENT: page.get(TITLE_CONTENT),
-                CONTENT: content
-            }
+                page = loader.load_item()
+                content = page.get(CONTENT)
+                if content:
+                    yield {
+                        SHORT_NAME: short_name,
+                        TITLE_INDEX: chapter_index,
+                        TITLE_CONTENT: page.get(TITLE_CONTENT),
+                        CONTENT: content
+                    }

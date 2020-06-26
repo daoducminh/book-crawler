@@ -1,7 +1,7 @@
 import os
 import pymongo
 from dotenv import load_dotenv
-from book_list import book_list
+from book_lists.book_list_tfull import book_list
 
 load_dotenv(dotenv_path='.env')
 

@@ -9,13 +9,6 @@ def reformat_chapter_content(text):
     arr = temp.split('\n')
     # Remove start and end whitespaces of each sentences
     map(str.strip, arr)
-    # Remove redeclare title
-    if re.search('Chương [0-9]+ *::', arr[0]):
-        arr = arr[1:]
-    # Remove credit and ads
-    arr[0] = remove_text_from_paragraph('Người đăng:.+', arr[0])
-    if arr[0] == '':
-        del arr[0]
     return arr
 
 

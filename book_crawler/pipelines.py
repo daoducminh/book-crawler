@@ -8,7 +8,7 @@
 import os
 import pymongo
 from dotenv import load_dotenv
-from utilities.books.constants import SHORT_NAME, TITLE_INDEX
+from utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX
 
 load_dotenv(dotenv_path='.env')
 

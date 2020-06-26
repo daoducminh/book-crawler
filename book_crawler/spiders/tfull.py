@@ -18,7 +18,7 @@ class TfullSpider(Spider):
         'ITEM_PIPELINES': {
             'book_crawler.pipelines.MongoPipeline': 1,
         },
-        # 'LOG_ENABLED': False,
+        'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*'
         }
@@ -59,7 +59,7 @@ class TfullSpider(Spider):
         except:
             last_chapter = int(last_chapter.split(' ')[-1])
 
-        for i in range(3, -1, -1):
+        for i in range(last_chapter, -1, -1):
             if i == 0:
                 yield {
                     SHORT_NAME: short_name,

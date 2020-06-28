@@ -1,11 +1,9 @@
 import sys
-from dotenv import load_dotenv
 from book_lists.source_picker import select_source
 from utilities.cli_utilities.create_html_ebook import create_html_ebook
 from utilities.cli_utilities.convert_ebook import convert_ebook
 from utilities.cli_utilities.transfer_books import upload_book_list, download_books
 
-load_dotenv(dotenv_path='.env')
 OPTION_LIST = ['create', 'convert', 'download', 'upload']
 
 if __name__ == "__main__":

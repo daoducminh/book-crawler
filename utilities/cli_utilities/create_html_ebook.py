@@ -2,7 +2,9 @@ from os import getenv
 import sys
 import pymongo
 from utilities.constants.common_constants import *
+from dotenv import load_dotenv
 
+load_dotenv(dotenv_path='.env')
 DATABASE_NAME = getenv('MONGODB_DATABASE')
 DATABASE_URI = getenv('MONGODB_URI')
 FILE_FORMAT = '<html>\n<head>\n{0}\n</head>\n<body>\n{1}</body>\n</html>'
@@ -47,5 +49,4 @@ def create_html_ebook(book_list):
                         content)
 
             file.write(FILE_FORMAT.format(h, body))
-
     client.close()

@@ -2,8 +2,8 @@ from scrapy import Item, Field
 from scrapy.loader.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
-from utilities.functions.common_chapter_utilities import *
-from utilities.functions.tcv_utilities import *
+from utilities.chapter_utilities.common_chapter_utilities import *
+from utilities.chapter_utilities.tcv_utilities import *
 
 
 class BookInfo(Item):

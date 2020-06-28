@@ -1,14 +1,15 @@
 import re
-from utilities.functions.common_chapter_utilities import remove_text_from_paragraph
+from utilities.chapter_utilities.common_chapter_utilities import remove_text_from_paragraph
 
 
 def reformat_chapter_content(text):
     # Remove whitespace at start and end
-    temp = text.strip()
+    temp = re.sub('(\r|\t)', '', text)
     # Split paragraph into sentences
-    arr = temp.split('\n')
+    arr = re.split(r'\n+ *', temp)
     # Remove start and end whitespaces of each sentences
     map(str.strip, arr)
+    arr = list(filter(None, arr))
     # Remove redeclare title
     if re.search('Chương [0-9]+ *::', arr[0]):
         arr = arr[1:]
@@ -20,4 +21,4 @@ def reformat_chapter_content(text):
 
 
 def get_last_chapter(text):
-    return re.split('[.\\-]', text)[-2]
+    return re.findall(r'\d+', text)[0]

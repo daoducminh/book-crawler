@@ -44,7 +44,7 @@ class TcvSpider(Spider):
         author = page.get(AUTHOR)
         last_chapter = int(page.get(LAST_CHAPTER))
 
-        for i in range(3, -1, -1):
+        for i in range(last_chapter, -1, -1):
             if i == 0:
                 yield {
                     SHORT_NAME: short_name,

@@ -17,7 +17,6 @@ class MongoPipeline(object):
     def __init__(self):
         self.collection_name = None
         self.mongo_uri = os.getenv('MONGODB_URI')
-        self.mongo_db = os.getenv('MONGODB_DATABASE')
         self.client = None
         self.db = None
 
@@ -30,7 +29,7 @@ class MongoPipeline(object):
 
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
-        self.db = self.client[self.mongo_db]
+        self.db = self.client[spider.name]
 
     def close_spider(self, spider):
         self.client.close()

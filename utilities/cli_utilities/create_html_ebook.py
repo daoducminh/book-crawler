@@ -5,7 +5,6 @@ from utilities.constants.common_constants import *
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='.env')
-DATABASE_NAME = getenv('MONGODB_DATABASE')
 DATABASE_URI = getenv('MONGODB_URI')
 FILE_FORMAT = '<html>\n<head>\n{0}\n</head>\n<body>\n{1}</body>\n</html>'
 BOOK_HEADER = '<title>{0}</title>\n<meta name="author" content="{1}">'
@@ -15,9 +14,9 @@ FIELD_EXSITED = {'$exists': True}
 CHAPTERS_PER_PART = 1000
 
 
-def create_html_ebook(book_list):
+def create_html_ebook(option, book_list):
     client = pymongo.MongoClient(DATABASE_URI)
-    db = client[DATABASE_NAME]
+    db = client[option]
 
     for book in book_list:
         collection = db[book]

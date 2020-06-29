@@ -23,6 +23,7 @@ if __name__ == "__main__":
                     upload_book_list(book_source)
             else:
                 print('Invalid book source.')
+            pass
         else:
             print('Invalid option')
     else:

@@ -15,7 +15,7 @@ setup(
         '.gitignore',
         'README.md',
         'data',
-        'books',
+        'books'
     ]),
     entry_points={'scrapy': ['settings = book_crawler.settings']},
     install_requires=[

@@ -1,8 +1,8 @@
 .idea/
 *.md
 !README.md
-/project.egg-info/
-/build/
+*.egg-info/
+build/
 book_list*.py
 test.py
 __pycache__/

@@ -14,7 +14,7 @@ if __name__ == "__main__":
         if option in OPTION_LIST:
             if book_list:
                 if option == 'create':
-                    create_html_ebook(option, book_list)
+                    create_html_ebook(book_source, book_list)
                 if option == 'convert':
                     convert_ebook(book_list)
                 if option == 'download':

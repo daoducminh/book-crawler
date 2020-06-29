@@ -14,9 +14,9 @@ FIELD_EXSITED = {'$exists': True}
 CHAPTERS_PER_PART = 1000
 
 
-def create_html_ebook(option, book_list):
+def create_html_ebook(book_source, book_list):
     client = pymongo.MongoClient(DATABASE_URI)
-    db = client[option]
+    db = client[book_source]
 
     for book in book_list:
         collection = db[book]

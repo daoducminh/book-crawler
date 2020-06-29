@@ -1,12 +1,12 @@
 # URLs
-BASE_URL = 'https://truyen.tangthuvien.vn/doc-truyen/{}'
-CHAPTER_URL = 'https://truyen.tangthuvien.vn/doc-truyen/{}/chuong-{}'
+BASE_URL = 'https://truyencv.com/{}'
+CHAPTER_URL = 'https://truyencv.com/{}/chuong-{}'
 
 # Book's info
-BOOK_FULL_NAME_PATH = "//a[@data-eid='qd_G03']"
-BOOK_AUTHOR_PATH = "//a[contains(@href,'tac-gia') and @target='_blank' and not(@data-eid)]"
-BOOK_LAST_CHAPTER_PATH = '#j-bookCatalogPage'
+BOOK_FULL_NAME_PATH = "h1.title > a::text"
+BOOK_AUTHOR_PATH = "a.author::text"
+BOOK_LAST_CHAPTER_PATH = '//div[@class="list-overview"]//a[1]/@href'
 
 # Chapter's content
-TITLE_CONTENT_PATH = 'h2'
-CONTENT_PATH = "//div[contains(@class,'box-chap') and not(contains(@class,'hidden'))]"
+TITLE_CONTENT_PATH = '//div[@id="js-truyencv-read-content"]//h2[@class="title"]/text()'
+CONTENT_PATH = "#js-truyencv-content::text"

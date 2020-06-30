@@ -7,10 +7,6 @@ from utilities.chapter_utilities.yy_utilities import *
 
 
 class Chapter(Item):
-    title_index = Field(
-        input_processor=MapCompose(remove_tags, get_title_index),
-        output_processor=Join()
-    )
     title_content = Field(
         input_processor=MapCompose(remove_tags, get_title_content),
         output_processor=Join()

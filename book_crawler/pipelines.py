@@ -7,8 +7,9 @@
 
 import os
 import pymongo
+import pickle
 from dotenv import load_dotenv
-from utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX
+from utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX, FULL_NAME
 
 load_dotenv(dotenv_path='.env')
 
@@ -19,13 +20,6 @@ class MongoPipeline(object):
         self.mongo_uri = os.getenv('MONGODB_URI')
         self.client = None
         self.db = None
-
-    # @classmethod
-    # def from_crawler(cls, crawler):
-    #     return cls(
-    #         mongo_uri=crawler.settings.get('MONGO_URI'),
-    #         mongo_db=crawler.settings.get('MONGO_DATABASE', 'items')
-    #     )
 
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
@@ -38,8 +32,28 @@ class MongoPipeline(object):
         short_name = item[SHORT_NAME]
         del item[SHORT_NAME]
         if TITLE_INDEX in item:
-            self.db[short_name].update_one({TITLE_INDEX: item[TITLE_INDEX]}, {
-                                           '$set': item}, upsert=True)
+            self.db[short_name].update_one(
+                {TITLE_INDEX: item[TITLE_INDEX]},
+                {'$set': item},
+                upsert=True
+            )
         else:
-            self.db[short_name].update_one(item, {'$set': item}, upsert=True)
-        return item
+            self.db[short_name].update_one(
+                item,
+                {'$set': item},
+                upsert=True
+            )
+            return item
+
+
+class BookListPipeline(object):
+    def open_spider(self, spider):
+        self.list = []
+
+    def close_spider(self, spider):
+        with open('book_lists/fullyy.pkl', 'wb') as file:
+            pickle.dump(self.list, file)
+
+    def process_item(self, item, spider):
+        if FULL_NAME in item:
+            self.list.append(item[SHORT_NAME])

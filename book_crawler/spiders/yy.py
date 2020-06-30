@@ -9,7 +9,7 @@ from utilities.constants.yy_constants import *
 from utilities.items.yy_book_items import Chapter, BookInfo
 
 
-class DemoSpider(Spider):
+class YYSpider(Spider):
     name = 'yy'
 
     custom_settings = {

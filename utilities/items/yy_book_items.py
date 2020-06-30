@@ -2,7 +2,7 @@ from scrapy import Item, Field
 from scrapy.loader.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
-from utilities.chapter_utilities.common_chapter_utilities import *
+from utilities.chapter_utilities.common_chapter_utilities import get_title_content, get_title_index
 from utilities.chapter_utilities.yy_utilities import *
 
 

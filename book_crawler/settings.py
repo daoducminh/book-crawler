@@ -21,7 +21,7 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1024
+CONCURRENT_REQUESTS = 512
 CONCURRENT_ITEMS = 500
 
 # Configure a delay for requests for the same website (default: 0)

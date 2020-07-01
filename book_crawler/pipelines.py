@@ -55,5 +55,6 @@ class BookListPipeline(object):
             pickle.dump(self.list, file)
 
     def process_item(self, item, spider):
-        if FULL_NAME in item:
-            self.list.append(item[SHORT_NAME])
+        if item:
+            if FULL_NAME in item:
+                self.list.append(item[SHORT_NAME])

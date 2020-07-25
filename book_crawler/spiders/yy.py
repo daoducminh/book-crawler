@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
+from os import getenv
 from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
+from dotenv import load_dotenv
 
 from book_lists.book_list_yy import book_list
 from utilities.constants.common_constants import *
 from utilities.constants.yy_constants import *
 from utilities.items.yy_book_items import Chapter, BookInfo
+
+load_dotenv(dotenv_path='.env')
+COOKIE = getenv('YY_COOKIE')
 
 
 class YYSpider(Spider):

@@ -2,7 +2,7 @@ from os import system
 import sys
 import re
 
-HTML_AZW3 = 'tsp ebook-convert books/{0}.html books/{0}.azw3 --level1-toc "//h:h1" --no-inline-toc'
+HTML_AZW3 = 'tsp ./convert.sh {0}'
 
 
 def convert_ebook(book_list):

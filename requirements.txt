@@ -2,12 +2,13 @@ astroid==2.4.2
 attrs==19.3.0
 Automat==20.2.0
 autopep8==1.5.3
+-e git+git@github.com:daoducminh/book-crawler.git@8dba92a531aad8dabbbd81b8c92c7bdc1f2d95ec#egg=book_crawler
 cffi==1.14.0
 constantly==15.1.0
 cryptography==2.9.2
 cssselect==1.1.0
 hyperlink==19.0.0
-idna==2.9
+idna==2.10
 incremental==17.5.0
 isort==4.3.21
 itemadapter==0.1.0

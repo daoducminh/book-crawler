@@ -1,7 +1,7 @@
 # URLs
-BASE_URL = 'https://truyenyy.com/truyen/{}/danh-sach-chuong?nf=yes'
-CHAPTER_URL = 'https://truyenyy.com/truyen/{0}/chuong-{1}.html'
-TOP_FULL_BOOK_URL = 'https://truyenyy.com/kim-thanh-bang/top/truyen-full/?page={}'
+BASE_URL = 'https://truyenyy.vn/truyen/{}/danh-sach-chuong?nf=yes'
+CHAPTER_URL = 'https://truyenyy.vn/truyen/{0}/chuong-{1}.html'
+TOP_FULL_BOOK_URL = 'https://truyenyy.vn/kim-thanh-bang/top/truyen-full/?page={}'
 
 # Book's info
 BOOK_LAST_CHAPTER_PATH = "//table[contains(@class,'table table-dark')]/tbody/tr[1]/td[1]/a/@href"

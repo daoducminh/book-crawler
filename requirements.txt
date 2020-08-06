@@ -1,7 +1,7 @@
 astroid==2.4.2
 attrs==19.3.0
 Automat==20.2.0
-autopep8==1.5.3
+autopep8==1.5.4
 -e git+git@github.com:daoducminh/book-crawler.git@8dba92a531aad8dabbbd81b8c92c7bdc1f2d95ec#egg=book_crawler
 cffi==1.14.0
 constantly==15.1.0

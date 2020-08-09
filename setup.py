@@ -26,6 +26,7 @@ setup(
         'pylint',
         'autopep8',
         'rope',
-        'python-dotenv'
+        'python-dotenv',
+        'dnspython'
     ]
 )

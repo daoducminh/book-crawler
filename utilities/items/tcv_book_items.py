@@ -1,5 +1,5 @@
 from scrapy import Item, Field
-from scrapy.loader.processors import Join, MapCompose
+from itemloaders.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
 from utilities.chapter_utilities.common_chapter_utilities import *

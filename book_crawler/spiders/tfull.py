@@ -5,9 +5,9 @@ from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
 from book_lists.book_list_tfull import book_list
-from utilities.constants.common_constants import *
-from utilities.constants.tfull_constants import *
-from utilities.items.tfull_book_items import Chapter, BookInfo
+from book_crawler.utilities.constants.common_constants import *
+from book_crawler.utilities.constants.tfull_constants import *
+from book_crawler.utilities.items.tfull_book_items import Chapter, BookInfo
 
 MAX_TRY = 1
 
@@ -51,35 +51,32 @@ class TfullSpider(Spider):
 
         # Extracting data
         page = loader.load_item()
-        full_name = page.get(FULL_NAME)
-        author = page.get(AUTHOR)
         last_chapter = page.get(LAST_CHAPTER)
         try:
             last_chapter = int(last_chapter)
         except:
             last_chapter = int(last_chapter.split(' ')[-1])
 
-        for i in range(last_chapter, -1, -1):
-            if i == 0:
-                yield {
-                    SHORT_NAME: short_name,
-                    FULL_NAME: full_name,
-                    AUTHOR: author,
-                    LAST_CHAPTER: last_chapter
-                }
-            else:
-                chapter_url = CHAPTER_URL.format(short_name, i)
-                yield Request(
-                    url=chapter_url,
-                    callback=self.parse_chapter,
-                    cb_kwargs=dict(
-                        short_name=short_name,
-                        chapter_index=i,
-                        chapter_url=chapter_url,
-                        count=0
-                    ),
-                    dont_filter=True
-                )
+        yield {
+            SHORT_NAME: short_name,
+            FULL_NAME: page.get(FULL_NAME),
+            AUTHOR: page.get(AUTHOR),
+            LAST_CHAPTER: last_chapter
+        }
+
+        for i in range(1, last_chapter + 1):
+            chapter_url = CHAPTER_URL.format(short_name, i)
+            yield Request(
+                url=chapter_url,
+                callback=self.parse_chapter,
+                cb_kwargs=dict(
+                    short_name=short_name,
+                    chapter_index=i,
+                    chapter_url=chapter_url,
+                    count=0
+                ),
+                dont_filter=True
+            )
 
     def parse_chapter(self, response: Response, short_name, chapter_index, chapter_url, count):
         if count <= MAX_TRY:

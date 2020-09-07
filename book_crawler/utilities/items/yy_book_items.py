@@ -2,8 +2,8 @@ from scrapy import Item, Field
 from itemloaders.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
-from utilities.chapter_utilities.common_chapter_utilities import get_title_content
-from utilities.chapter_utilities.yy_utilities import *
+from book_crawler.utilities.chapter_utilities.common_chapter_utilities import get_title_content
+from book_crawler.utilities.chapter_utilities.yy_utilities import *
 
 
 class Chapter(Item):

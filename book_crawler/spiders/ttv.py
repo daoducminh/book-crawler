@@ -4,9 +4,9 @@ from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
 from book_lists.book_list_ttv import book_list
-from utilities.constants.common_constants import *
-from utilities.constants.ttv_constants import *
-from utilities.items.ttv_book_items import Chapter, BookInfo
+from book_crawler.utilities.constants.common_constants import *
+from book_crawler.utilities.constants.ttv_constants import *
+from book_crawler.utilities.items.ttv_book_items import Chapter, BookInfo
 
 
 class TtvSpider(Spider):
@@ -45,24 +45,21 @@ class TtvSpider(Spider):
 
         # Extracting data
         page = loader.load_item()
-        full_name = page.get(FULL_NAME)
-        author = page.get(AUTHOR)
         last_chapter = int(page.get(LAST_CHAPTER))
 
-        for i in range(last_chapter, -1, -1):
-            if i != 0:
-                yield Request(
-                    url=CHAPTER_URL.format(short_name, i),
-                    callback=self.parse_chapter,
-                    cb_kwargs=dict(short_name=short_name, chapter_index=i)
-                )
-            else:
-                yield {
-                    SHORT_NAME: short_name,
-                    FULL_NAME: full_name,
-                    AUTHOR: author,
-                    LAST_CHAPTER: last_chapter
-                }
+        yield {
+            SHORT_NAME: short_name,
+            FULL_NAME: page.get(FULL_NAME),
+            AUTHOR: page.get(AUTHOR),
+            LAST_CHAPTER: last_chapter
+        }
+
+        for i in range(1, last_chapter + 1):
+            yield Request(
+                url=CHAPTER_URL.format(short_name, i),
+                callback=self.parse_chapter,
+                cb_kwargs=dict(short_name=short_name, chapter_index=i)
+            )
 
     def parse_chapter(self, response: Response, short_name, chapter_index):
         # Get chapter data using ItemLoader

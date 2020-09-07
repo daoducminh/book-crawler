@@ -1,7 +1,7 @@
 from os import getenv
 import sys
 import pymongo
-from utilities.constants.common_constants import *
+from book_crawler.utilities.constants.common_constants import *
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='.env')

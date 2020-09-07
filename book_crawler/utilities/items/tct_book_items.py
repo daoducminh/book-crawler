@@ -3,7 +3,7 @@ from itemloaders.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
 from book_crawler.utilities.chapter_utilities.common_chapter_utilities import get_title_content
-from book_crawler.utilities.chapter_utilities.tct_utilities import reformat_chapter_content, get_title_index
+from book_crawler.utilities.chapter_utilities.tct_utilities import reformat_chapter_content, get_title_index, get_last_chapter
 
 
 class Chapter(Item):
@@ -28,5 +28,9 @@ class BookInfo(Item):
     )
     author = Field(
         input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join()
+    )
+    last_chapter = Field(
+        input_processor=MapCompose(remove_tags, get_last_chapter),
         output_processor=Join()
     )

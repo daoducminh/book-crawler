@@ -79,7 +79,7 @@ class TctSpider(Spider):
         if content:
             yield {
                 SHORT_NAME: short_name,
-                TITLE_INDEX: page.get(TITLE_INDEX),
+                TITLE_INDEX: int(page.get(TITLE_INDEX)),
                 TITLE_CONTENT: page.get(TITLE_CONTENT),
                 CONTENT: content
             }

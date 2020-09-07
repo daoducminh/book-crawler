@@ -8,11 +8,11 @@ from book_crawler.utilities.chapter_utilities.tct_utilities import reformat_chap
 
 class Chapter(Item):
     title_index = Field(
-        input_processor=MapCompose(get_title_index),
+        input_processor=MapCompose(remove_tags, get_title_index),
         output_processor=Join()
     )
     title_content = Field(
-        input_processor=MapCompose(get_title_content),
+        input_processor=MapCompose(remove_tags, get_title_content),
         output_processor=Join()
     )
     content = Field(

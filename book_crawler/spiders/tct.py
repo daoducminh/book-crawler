@@ -12,10 +12,10 @@ class TctSpider(Spider):
     name = 'tct'
 
     custom_settings = {
-        'ITEM_PIPELINES': {
-            'book_crawler.pipelines.MongoPipeline': 1,
-        },
-        'LOG_ENABLED': False,
+        # 'ITEM_PIPELINES': {
+        #     'book_crawler.pipelines.MongoPipeline': 1,
+        # },
+        # 'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*'
         }
@@ -48,7 +48,7 @@ class TctSpider(Spider):
         last_page_url = response.css(BOOK_LAST_PAGE_PATH).get()
         last_page = int(last_page_url.split('=')[1])
 
-        for i in range(1, last_page + 1):
+        for i in range(1, 1 + 1):
             yield Request(
                 url=PAGE_URL.format(short_name, i),
                 callback=self.parse_list_chapters,

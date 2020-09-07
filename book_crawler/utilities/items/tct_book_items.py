@@ -3,7 +3,7 @@ from itemloaders.processors import Join, MapCompose
 from w3lib.html import remove_tags
 
 from book_crawler.utilities.chapter_utilities.common_chapter_utilities import get_title_content
-from book_crawler.utilities.chapter_utilities.tct_utilities import reformat_chapter_content, get_title_index, get_last_chapter
+from book_crawler.utilities.chapter_utilities.tct_utilities import replace_break_element, get_title_index, get_last_chapter, reformat_chapter_content
 
 
 class Chapter(Item):
@@ -16,8 +16,12 @@ class Chapter(Item):
         output_processor=Join()
     )
     content = Field(
-        input_processor=MapCompose(remove_tags, reformat_chapter_content),
-        output_processor=Join('\n\n')
+        input_processor=MapCompose(
+            replace_break_element,
+            remove_tags,
+            reformat_chapter_content
+        ),
+        output_processor=Join('\n')
     )
 
 

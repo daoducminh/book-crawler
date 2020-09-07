@@ -4,7 +4,7 @@ from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 from dotenv import load_dotenv
 
-from utilities.constants.yy_constants import TOP_BOOK_URLS, TOP_FULL_BOOK_URL, BASE_URL
+from book_crawler.utilities.constants.yy_constants import TOP_BOOK_URLS, TOP_FULL_BOOK_URL, BASE_URL
 from book_crawler.spiders.yy import YYSpider
 
 load_dotenv(dotenv_path='.env')

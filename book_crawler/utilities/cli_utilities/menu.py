@@ -1,8 +1,8 @@
 import sys
-from utilities.cli_utilities.source_picker import select_source
-from utilities.cli_utilities.create_html_ebook import create_html_ebook
-from utilities.cli_utilities.convert_ebook import convert_ebook
-from utilities.cli_utilities.transfer_books import upload_book_list, download_books
+from book_crawler.utilities.cli_utilities.source_picker import select_source
+from book_crawler.utilities.cli_utilities.create_html_ebook import create_html_ebook
+from book_crawler.utilities.cli_utilities.convert_ebook import convert_ebook
+from book_crawler.utilities.cli_utilities.transfer_books import upload_book_list, download_books
 
 OPTION_LIST = ['create', 'convert', 'download', 'upload']
 

@@ -1,21 +1,18 @@
-# -*- coding: utf-8 -*-
-from os import getenv
 from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
-from dotenv import load_dotenv
 
-from book_lists.book_list_yy import book_list
+from book_lists.book_list_tct import book_list
 from book_crawler.utilities.constants.common_constants import *
-from book_crawler.utilities.constants.yy_constants import *
-from book_crawler.utilities.items.yy_book_items import Chapter, BookInfo
+from book_crawler.utilities.constants.tct_constants import *
+from book_crawler.utilities.items.tct_book_items import Chapter, BookInfo
 
-load_dotenv(dotenv_path='.env')
-COOKIE = getenv('YY_COOKIE')
+# .danh-sach-chuong a
+# .pagination li:last-child
 
 
-class YYSpider(Spider):
-    name = 'yy'
+class TctSpider(Spider):
+    name = 'tct'
 
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -36,35 +33,44 @@ class YYSpider(Spider):
             )
 
     def parse_book_info(self, response: Response, short_name):
-        # Get book's full name and author
         loader = ItemLoader(item=BookInfo(), response=response)
-        # Find elements
-        loader.add_css(FULL_NAME, BOOK_FULL_NAME_PATH)
-        loader.add_css(AUTHOR, BOOK_AUTHOR_PATH)
-        loader.add_xpath(LAST_CHAPTER, BOOK_LAST_CHAPTER_PATH)
 
-        # Extracting data
+        loader.add_css(FULL_NAME, BOOK_FULL_NAME_PATH)
+        loader.add_xpath(AUTHOR, BOOK_AUTHOR_PATH)
+
         page = loader.load_item()
-        last_chapter = int(page.get(LAST_CHAPTER))
 
         yield {
             SHORT_NAME: short_name,
             FULL_NAME: page.get(FULL_NAME),
-            AUTHOR: page.get(AUTHOR),
-            LAST_CHAPTER: last_chapter
+            AUTHOR: page.get(AUTHOR)
         }
 
-        for i in range(1, last_chapter + 1):
+        last_page_url = response.css(BOOK_LAST_PAGE).get()
+        last_page = int(last_page_url.split('=')[1])
+
+        for i in range(1, last_page + 1):
             yield Request(
-                url=CHAPTER_URL.format(short_name, i),
-                callback=self.parse_chapter,
-                cb_kwargs=dict(short_name=short_name, chapter_index=i)
+                url=PAGE_URL.format(short_name, i),
+                callback=self.parse_list_chapters,
+                cb_kwargs=dict(short_name=short_name)
             )
 
-    def parse_chapter(self, response: Response, short_name, chapter_index):
-        # Get chapter data using ItemLoader
+    def parse_list_chapters(self, response, short_name):
+        chapter_urls = response.css(CHAPTER_URLS).extract()
+
+        for chapter_url in chapter_urls:
+            url = response.urljoin(chapter_url)
+            yield Request(
+                url=url,
+                callback=self.parse_chapter,
+                cb_kwargs=dict(short_name=short_name)
+            )
+
+    def parse_chapter(self, response, short_name):
         loader = ItemLoader(item=Chapter(), response=response)
         # Find elements
+        loader.add_css(TITLE_INDEX, TITLE_INDEX_PATH)
         loader.add_css(TITLE_CONTENT, TITLE_CONTENT_PATH)
         loader.add_css(CONTENT, CONTENT_PATH)
 
@@ -74,7 +80,7 @@ class YYSpider(Spider):
         if content:
             yield {
                 SHORT_NAME: short_name,
-                TITLE_INDEX: chapter_index,
+                TITLE_INDEX: page.get(TITLE_INDEX),
                 TITLE_CONTENT: page.get(TITLE_CONTENT),
                 CONTENT: content
             }

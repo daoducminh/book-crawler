@@ -1,5 +1,5 @@
 import re
-from utilities.chapter_utilities.common_chapter_utilities import remove_text_from_paragraph
+from book_crawler.utilities.chapter_utilities.common_chapter_utilities import remove_text_from_paragraph
 
 
 def reformat_chapter_content(text):

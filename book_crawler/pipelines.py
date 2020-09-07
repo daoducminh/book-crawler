@@ -9,7 +9,7 @@ import os
 import pymongo
 import pickle
 from dotenv import load_dotenv
-from utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX, FULL_NAME
+from book_crawler.utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX, FULL_NAME
 
 load_dotenv(dotenv_path='.env')
 

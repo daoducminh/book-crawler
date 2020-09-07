@@ -7,9 +7,6 @@ from book_crawler.utilities.constants.common_constants import *
 from book_crawler.utilities.constants.tct_constants import *
 from book_crawler.utilities.items.tct_book_items import Chapter, BookInfo
 
-# .danh-sach-chuong a
-# .pagination li:last-child
-
 
 class TctSpider(Spider):
     name = 'tct'

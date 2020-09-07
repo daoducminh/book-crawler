@@ -12,10 +12,10 @@ class TctSpider(Spider):
     name = 'tct'
 
     custom_settings = {
-        # 'ITEM_PIPELINES': {
-        #     'book_crawler.pipelines.MongoPipeline': 1,
-        # },
-        # 'LOG_ENABLED': False,
+        'ITEM_PIPELINES': {
+            'book_crawler.pipelines.MongoPipeline': 1,
+        },
+        'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*'
         }

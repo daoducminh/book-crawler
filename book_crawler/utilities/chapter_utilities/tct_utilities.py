@@ -13,9 +13,9 @@ def reformat_chapter_content(text):
     if re.search('Chương [0-9]+ *::', arr[0]):
         arr = arr[1:]
     # Remove credit and ads
-    arr[0] = remove_text_from_paragraph('Người đăng:.+', arr[0])
-    if arr[0] == '':
-        del arr[0]
+    arr[-1] = remove_text_from_paragraph('Giao diện cho điện thoại', arr[-1])
+    while arr[-1] == '':
+        del arr[-1]
     return arr
 
 
@@ -26,3 +26,7 @@ def get_title_index(text: str):
 
 def get_last_chapter(text: str):
     return text.split(' ')[0]
+
+
+def replace_break_element(text: str):
+    return text.replace('<br>', '\n')

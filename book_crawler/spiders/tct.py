@@ -34,16 +34,18 @@ class TctSpider(Spider):
 
         loader.add_css(FULL_NAME, BOOK_FULL_NAME_PATH)
         loader.add_xpath(AUTHOR, BOOK_AUTHOR_PATH)
+        loader.add_css(LAST_CHAPTER, BOOK_LAST_CHAPTER_PATH)
 
         page = loader.load_item()
 
         yield {
             SHORT_NAME: short_name,
             FULL_NAME: page.get(FULL_NAME),
-            AUTHOR: page.get(AUTHOR)
+            AUTHOR: page.get(AUTHOR),
+            LAST_CHAPTER: int(page.get(LAST_CHAPTER))
         }
 
-        last_page_url = response.css(BOOK_LAST_PAGE).get()
+        last_page_url = response.css(BOOK_LAST_PAGE_PATH).get()
         last_page = int(last_page_url.split('=')[1])
 
         for i in range(1, last_page + 1):

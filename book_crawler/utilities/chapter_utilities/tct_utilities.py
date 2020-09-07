@@ -22,3 +22,7 @@ def reformat_chapter_content(text):
 def get_title_index(text: str):
     text = text.split(':')[0]
     return text.split(' ')[1]
+
+
+def get_last_chapter(text: str):
+    return text.split(' ')[0]

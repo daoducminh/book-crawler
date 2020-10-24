@@ -1,4 +1,4 @@
-from os import system
+from os import system, listdir
 import sys
 import re
 
@@ -9,6 +9,9 @@ NO_INLINE_TOC = '--no-inline-toc'
 
 
 def convert_ebook(book_list):
-    for book in book_list:
-        system(CONVERT_CMD.format(book, AZW3, NO_INLINE_TOC))
-        system(CONVERT_CMD.format(book, EPUB, ''))
+    for file in listdir('books/'):
+        for book in book_list:
+            if book in file:
+                file_name = file[:-5]
+                system(CONVERT_CMD.format(file_name, AZW3, NO_INLINE_TOC))
+                system(CONVERT_CMD.format(file_name, EPUB, ''))

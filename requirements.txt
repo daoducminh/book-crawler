@@ -1,14 +1,14 @@
 astroid==2.4.2
 attrs==19.3.0
 Automat==20.2.0
-autopep8==1.5.3
--e git+git@github.com:daoducminh/book-crawler.git@ff88473ec9bcf47003d7e37541bc7761cfd8cd1d#egg=book_crawler
-cffi==1.14.0
+autopep8==1.5.4
+-e git+git@github.com:daoducminh/book-crawler.git@24c7e2f518b015b50932b3bb491cce967265d705#egg=book_crawler
+cffi==1.14.1
 constantly==15.1.0
-cryptography==2.9.2
+cryptography==3.0
 cssselect==1.1.0
 dnspython==2.0.0
-hyperlink==19.0.0
+hyperlink==20.0.1
 idna==2.10
 incremental==17.5.0
 isort==4.3.21
@@ -16,7 +16,7 @@ itemadapter==0.1.0
 itemloaders==1.0.2
 jmespath==0.10.0
 lazy-object-proxy==1.4.3
-lxml==4.5.1
+lxml==4.5.2
 mccabe==0.6.1
 parsel==1.6.0
 Protego==0.1.16
@@ -27,12 +27,12 @@ pycparser==2.20
 PyDispatcher==2.0.5
 PyHamcrest==2.0.2
 pylint==2.5.3
-pymongo==3.10.1
+pymongo==3.11.0
 pyOpenSSL==19.1.0
-python-dotenv==0.13.0
+python-dotenv==0.14.0
 queuelib==1.5.0
 rope==0.17.0
-Scrapy==2.3.0
+Scrapy==2.4.0
 service-identity==18.1.0
 six==1.15.0
 toml==0.10.1

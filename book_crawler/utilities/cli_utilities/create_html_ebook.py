@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from os import getenv
-import sys
+
 import pymongo
-from book_crawler.utilities.constants.common_constants import *
 from dotenv import load_dotenv
+
+from book_crawler.utilities.constants.common_constants import *
 
 load_dotenv(dotenv_path='.env')
 DATABASE_URI = getenv('MONGODB_URI')

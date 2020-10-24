@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # URLs
 BASE_URL = 'https://truyen.tangthuvien.vn/doc-truyen/{}'
 CHAPTER_URL = 'https://truyen.tangthuvien.vn/doc-truyen/{}/chuong-{}'

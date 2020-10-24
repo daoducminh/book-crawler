@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
+
 from os import system, listdir
-import sys
-import re
 
 AZW3 = 'azw3'
 EPUB = 'epub'

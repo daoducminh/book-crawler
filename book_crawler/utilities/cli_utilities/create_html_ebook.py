@@ -28,7 +28,6 @@ def create_html_ebook(book_source, book_list):
 
         header = collection.find_one({AUTHOR: FIELD_EXSITED})
         h = BOOK_HEADER.format(header[FULL_NAME], header[AUTHOR])
-        body = ''
         last_chapter = header[LAST_CHAPTER]
         remainder = last_chapter % CHAPTERS_PER_PART
         max_parts = last_chapter // CHAPTERS_PER_PART
@@ -36,6 +35,7 @@ def create_html_ebook(book_source, book_list):
             max_parts = max_parts + 1
 
         for i in range(max_parts):
+            body = ''
             chapters = collection.find({TITLE_INDEX: FIELD_EXSITED}).sort(
                 TITLE_INDEX, pymongo.ASCENDING).limit(CHAPTERS_PER_PART).skip(i*CHAPTERS_PER_PART)
 

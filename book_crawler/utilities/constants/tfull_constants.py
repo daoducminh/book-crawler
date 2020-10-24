@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # URLs
 BASE_URL = 'https://truyenfull.vn/{}'
 LAST_CHAPTER_PAGE = 'https://truyenfull.vn/{}/trang-{}'

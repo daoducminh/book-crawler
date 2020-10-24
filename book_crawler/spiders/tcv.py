@@ -3,10 +3,10 @@ from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
-from book_lists.book_list_tcv import book_list
 from book_crawler.utilities.constants.common_constants import *
 from book_crawler.utilities.constants.tcv_constants import *
 from book_crawler.utilities.items.tcv_book_items import Chapter, BookInfo
+from book_lists.book_list_tcv import book_list
 
 
 class TcvSpider(Spider):

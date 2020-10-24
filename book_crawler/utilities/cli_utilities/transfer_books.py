@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from os import system, getenv
+
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='.env')

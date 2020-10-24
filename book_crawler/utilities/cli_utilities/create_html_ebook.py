@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from os import getenv
-import sys
+
 import pymongo
-from book_crawler.utilities.constants.common_constants import *
 from dotenv import load_dotenv
+
+from book_crawler.utilities.constants.common_constants import *
 
 load_dotenv(dotenv_path='.env')
 DATABASE_URI = getenv('MONGODB_URI')
@@ -36,12 +39,12 @@ def create_html_ebook(book_source, book_list):
 
             for i in range(max_parts):
                 chapters = collection.find({TITLE_INDEX: FIELD_EXSITED}).sort(
-                    TITLE_INDEX, pymongo.ASCENDING).limit(CHAPTERS_PER_PART).skip(i*CHAPTERS_PER_PART)
+                    TITLE_INDEX, pymongo.ASCENDING).limit(CHAPTERS_PER_PART).skip(i * CHAPTERS_PER_PART)
 
                 for chapter in chapters:
                     arr = chapter[CONTENT].split('\n\n')
 
-                    content = '<p>'+'</p><p>'.join(arr)+'</p>'
+                    content = '<p>' + '</p><p>'.join(arr) + '</p>'
                     body += CHAPTER.format(
                         chapter[TITLE_INDEX],
                         chapter[TITLE_CONTENT],

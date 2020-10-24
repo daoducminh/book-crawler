@@ -1,5 +1,7 @@
-from scrapy import Item, Field
+# -*- coding: utf-8 -*-
+
 from itemloaders.processors import Join, MapCompose
+from scrapy import Item, Field
 from w3lib.html import remove_tags
 
 from book_crawler.utilities.chapter_utilities.common_chapter_utilities import get_title_content

@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
+
 from os import system
-import sys
-import re
 
 CONVERT_CMD = 'tsp ./convert.sh {0} {1} {2}'
 AZW3 = 'azw3'

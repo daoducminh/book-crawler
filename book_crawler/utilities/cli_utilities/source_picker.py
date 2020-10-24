@@ -1,6 +1,8 @@
-from book_lists import book_list_yy, book_list_ttv, book_list_tfull, book_list_tcv, book_list_tct
-from os import getenv
+# -*- coding: utf-8 -*-
+
 from dotenv import load_dotenv
+
+from book_lists import book_list_yy, book_list_ttv, book_list_tfull, book_list_tcv, book_list_tct
 
 load_dotenv(dotenv_path='.env')
 

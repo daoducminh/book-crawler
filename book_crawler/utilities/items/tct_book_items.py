@@ -1,9 +1,12 @@
-from scrapy import Item, Field
+# -*- coding: utf-8 -*-
+
 from itemloaders.processors import Join, MapCompose
+from scrapy import Item, Field
 from w3lib.html import remove_tags
 
 from book_crawler.utilities.chapter_utilities.common_chapter_utilities import get_title_content
-from book_crawler.utilities.chapter_utilities.tct_utilities import replace_break_element, get_title_index, get_last_chapter, reformat_chapter_content
+from book_crawler.utilities.chapter_utilities.tct_utilities import replace_break_element, get_title_index, \
+    get_last_chapter, reformat_chapter_content
 
 
 class Chapter(Item):

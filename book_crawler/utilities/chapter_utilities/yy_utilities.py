@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import re
+
 from book_crawler.utilities.chapter_utilities.common_chapter_utilities import remove_text_from_paragraph
 
 

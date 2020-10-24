@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from scrapy import Request, Spider
 from scrapy.http.response import Response
 from scrapy.loader import ItemLoader
 
-from book_lists.book_list_tct import book_list
 from book_crawler.utilities.constants.common_constants import *
 from book_crawler.utilities.constants.tct_constants import *
 from book_crawler.utilities.items.tct_book_items import Chapter, BookInfo
+from book_lists.book_list_tct import book_list
 
 
 class TctSpider(Spider):

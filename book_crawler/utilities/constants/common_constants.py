@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 FULL_NAME = 'full_name'
 SHORT_NAME = 'short_name'
 AUTHOR = 'author'

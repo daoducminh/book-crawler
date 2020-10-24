@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # URLs
 BASE_URL = 'https://truyencuatui.net/truyen/{0}.html'
 PAGE_URL = 'https://truyencuatui.net/truyen/{0}.html?page={1}'

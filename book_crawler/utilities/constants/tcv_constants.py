@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # URLs
 BASE_URL = 'https://truyencv.com/{}'
 CHAPTER_URL = 'https://truyencv.com/{}/chuong-{}'

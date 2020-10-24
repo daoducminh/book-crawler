@@ -6,9 +6,11 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 import os
-import pymongo
 import pickle
+
+import pymongo
 from dotenv import load_dotenv
+
 from book_crawler.utilities.constants.common_constants import SHORT_NAME, TITLE_INDEX, FULL_NAME
 
 load_dotenv(dotenv_path='.env')

@@ -9,7 +9,7 @@ def reformat_chapter_content(text):
     # Remove whitespace at start and end
     temp = text.strip()
     # Split paragraph into sentences
-    arr = temp.split('\n')
+    arr = temp.split('\n\n')
     # Remove start and end whitespaces of each sentences
     map(str.strip, arr)
     # Remove redeclare title
@@ -19,6 +19,8 @@ def reformat_chapter_content(text):
     arr[0] = remove_text_from_paragraph('Người đăng:.+', arr[0])
     if arr[0] == '':
         del arr[0]
+    for i in range(len(arr)):
+        arr[i] = arr[i].replace('\n', ' ')
     return arr
 
 

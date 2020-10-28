@@ -21,6 +21,8 @@ def reformat_chapter_content(text):
         del arr[0]
     for i in range(len(arr)):
         arr[i] = arr[i].replace('\n', ' ')
+        arr[i] = re.sub(r'\s{2,}', ' ', arr[i])
+        arr[i] = arr[i].strip()
     return arr
 
 

@@ -13,5 +13,5 @@ def convert_ebook(book_list):
         for book in book_list:
             if book in file:
                 file_name = file[:-5]
-                system(CONVERT_CMD.format(file_name, AZW3, NO_INLINE_TOC))
-                system(CONVERT_CMD.format(file_name, EPUB, ''))
+                system(CONVERT_CMD.format(book, file_name, AZW3, NO_INLINE_TOC))
+                system(CONVERT_CMD.format(book, file_name, EPUB, ''))

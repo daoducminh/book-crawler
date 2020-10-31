@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from os import getenv
+from os import getenv, system
 
 import pymongo
 from dotenv import load_dotenv
@@ -12,7 +12,7 @@ DATABASE_URI = getenv('MONGODB_URI')
 FILE_FORMAT = '<html>\n<head>\n{0}\n</head>\n<body>\n{1}</body>\n</html>'
 BOOK_HEADER = '<title>{0}-{2}</title>\n<meta name="author" content="{1}">'
 CHAPTER = '<h1 title="{0}">Chương {0}: {1}</h1>\n<div>{2}</div>\n'
-HTML_FILE = 'books/{0}-{1}.html'
+HTML_FILE = 'books/{0}/{0}-{1}.html'
 FIELD_EXSITED = {'$exists': True}
 CHAPTERS_PER_PART = 500
 
@@ -22,6 +22,7 @@ def create_html_ebook(book_source, book_list):
     db = client[book_source]
 
     for book in book_list:
+        system(MKDIR_CMD.format(book))
         collection = db[book]
         response = collection.create_index([(TITLE_INDEX, pymongo.ASCENDING)])
         print(response)

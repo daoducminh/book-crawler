@@ -11,11 +11,13 @@ def reformat_chapter_content(text):
     # Remove start and end whitespaces of each sentences
     map(str.strip, arr)
     for i in range(len(arr)):
-        arr[i] = arr[i].replace('\n', ' ')
-        arr[i] = re.sub(r'\s{2,}', ' ', arr[i])
-        arr[i] = arr[i].strip()
         if not arr[i]:
             del arr[i]
+        else:
+            arr[i] = re.sub(r'\s{2,}', ' ', arr[i])
+            arr[i] = arr[i].strip()
+            if not arr[i]:
+                del arr[i]
     return arr
 
 

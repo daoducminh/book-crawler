@@ -14,7 +14,11 @@ class Chapter(Item):
         output_processor=Join()
     )
     content = Field(
-        input_processor=MapCompose(remove_tags, reformat_chapter_content),
+        input_processor=MapCompose(
+            convert_line_break,
+            remove_tags,
+            reformat_chapter_content
+        ),
         output_processor=Join('\n\n')
     )
 

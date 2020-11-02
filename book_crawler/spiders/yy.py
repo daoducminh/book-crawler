@@ -23,9 +23,9 @@ class YYSpider(Spider):
             'book_crawler.pipelines.MongoPipeline': 1,
         },
         'LOG_ENABLED': False,
-        'COOKIE': COOKIE if COOKIE else '',
         'DEFAULT_REQUEST_HEADERS': {
-            'accept': '*/*'
+            'accept': '*/*',
+            'cookie': COOKIE if COOKIE else ''
         }
     }
 

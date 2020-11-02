@@ -12,7 +12,12 @@ from book_crawler.utilities.items.yy_book_items import Chapter, BookInfo
 from book_lists.book_list_yy import book_list
 
 load_dotenv(dotenv_path='.env')
-COOKIE = getenv('YY_COOKIE')
+COOKIES = getenv('YY_COOKIES')
+cookies = {}
+if COOKIES:
+    for b in COOKIES.split(';'):
+        c = b.split('=')
+        cookies[c[0].strip()] = c[1].strip()
 
 
 class YYSpider(Spider):
@@ -24,8 +29,7 @@ class YYSpider(Spider):
         },
         'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
-            'accept': '*/*',
-            'cookie': COOKIE if COOKIE else ''
+            'accept': '*/*'
         }
     }
 
@@ -60,7 +64,8 @@ class YYSpider(Spider):
             yield Request(
                 url=CHAPTER_URL.format(short_name, i),
                 callback=self.parse_chapter,
-                cb_kwargs=dict(short_name=short_name, chapter_index=i)
+                cb_kwargs=dict(short_name=short_name, chapter_index=i),
+                cookies=cookies
             )
 
     def parse_chapter(self, response: Response, short_name, chapter_index):

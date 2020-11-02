@@ -21,7 +21,6 @@ def reformat_chapter_content(text):
         if not arr[i]:
             del arr[i]
         else:
-            arr[i] = arr[i].replace('\n', ' ')
             arr[i] = re.sub(r'\s{2,}', ' ', arr[i])
             arr[i] = arr[i].strip()
             if not arr[i]:

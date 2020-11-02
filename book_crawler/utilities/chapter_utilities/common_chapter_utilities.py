@@ -11,3 +11,7 @@ def get_title_content(text: str):
 
 def remove_text_from_paragraph(text, paragraph):
     return re.sub(text, '', paragraph)
+
+
+def convert_line_break(text: str):
+    return re.sub(r'(<br\/?>|<\/?p>)', '\n', text)

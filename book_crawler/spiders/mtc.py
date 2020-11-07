@@ -14,9 +14,9 @@ class MtcSpider(Spider):
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            # 'book_crawler.pipelines.MongoPipeline': 1,
+            'book_crawler.pipelines.MongoPipeline': 1,
         },
-        # 'LOG_ENABLED': False,
+        'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {
             'accept': '*/*'
         }

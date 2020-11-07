@@ -82,7 +82,7 @@ class TfullSpider(Spider):
             count = count + 1
             if chapter_url != response.request.url:
                 chapter_url = CHAPTER_URL.format(
-                    short_name, f'{"0"*count}{chapter_index}'
+                    short_name, f'{"0" * count}{chapter_index}'
                 )
                 yield Request(
                     url=chapter_url,

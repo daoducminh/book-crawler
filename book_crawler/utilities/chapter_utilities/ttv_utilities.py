@@ -21,9 +21,7 @@ def reformat_chapter_content(text):
     for i in range(len(arr)):
         arr[i] = re.sub(r'\s{2,}', ' ', arr[i])
         arr[i] = arr[i].strip()
-        if not arr[i]:
-            del arr[i]
-    return arr
+    return [l for l in arr if l]
 
 
 def get_last_chapter(text):

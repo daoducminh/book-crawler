@@ -11,4 +11,4 @@ BOOK_AUTHOR_PATH = '//*[@id="app"]//li[@class="d-inline-block border border-seco
 
 # Chapter's content
 TITLE_CONTENT_PATH = '.h1'
-CONTENT_PATH = '.post-body'
+CONTENT_PATH = '.post-body::text'

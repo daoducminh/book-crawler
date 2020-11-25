@@ -3,7 +3,7 @@ attrs==19.3.0
 Automat==20.2.0
 autopep8==1.5.4
 -e git+git@github.com:daoducminh/book-crawler.git@24c7e2f518b015b50932b3bb491cce967265d705#egg=book_crawler
-cffi==1.14.1
+cffi==1.14.4
 constantly==15.1.0
 cryptography==3.0
 cssselect==1.1.0

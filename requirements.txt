@@ -5,7 +5,7 @@ autopep8==1.5.4
 -e git+git@github.com:daoducminh/book-crawler.git@24c7e2f518b015b50932b3bb491cce967265d705#egg=book_crawler
 cffi==1.14.1
 constantly==15.1.0
-cryptography==3.0
+cryptography==3.3.1
 cssselect==1.1.0
 dnspython==2.0.0
 hyperlink==20.0.1

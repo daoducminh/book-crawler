@@ -24,8 +24,6 @@ def create_html_ebook(book_source, book_list):
     for book in book_list:
         system(MKDIR_CMD.format(book))
         collection = db[book]
-        response = collection.create_index([(TITLE_INDEX, pymongo.ASCENDING)])
-        print(response)
 
         header = collection.find_one({AUTHOR: FIELD_EXSITED})
         last_chapter = header[LAST_CHAPTER]

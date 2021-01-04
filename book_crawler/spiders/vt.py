@@ -10,7 +10,7 @@ from book_lists.book_list_vt import book_list
 
 
 class MtcSpider(Spider):
-    name = 'mtc'
+    name = 'vt'
 
     custom_settings = {
         'ITEM_PIPELINES': {

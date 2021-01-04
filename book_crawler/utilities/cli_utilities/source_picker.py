@@ -31,6 +31,9 @@ def select_source(x):
     elif x == 'mtc':
         from book_lists.book_list_mtc import book_list
         return book_list
+    elif x == 'vt':
+        from book_lists.book_list_vt import book_list
+        return book_list
     # elif x == '':
     #     from book_lists.book_list_ import book_list
     #     return book_list

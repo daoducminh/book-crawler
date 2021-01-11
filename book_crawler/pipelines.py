@@ -16,14 +16,6 @@ from book_crawler.utilities.constants.common_constants import SHORT_NAME, TITLE_
 load_dotenv(dotenv_path='.env')
 
 
-class SQLitePipeline:
-    def __init__(self):
-        pass
-
-    def open_spider(self, spider):
-        pass
-
-
 class MongoPipeline:
     def __init__(self):
         self.collection_name = None

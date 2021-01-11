@@ -13,6 +13,7 @@ FILE_FORMAT = '<html>\n<head>\n{0}\n</head>\n<body>\n{1}</body>\n</html>'
 BOOK_HEADER = '<title>{0}-{2}</title>\n<meta name="author" content="{1}">'
 CHAPTER = '<h1 title="{0}">Chương {0}: {1}</h1>\n<div>{2}</div>\n'
 HTML_FILE = 'books/{0}/{0}-{1}.html'
+MKDIR_CMD = 'mkdir -p books/{}'
 FIELD_EXSITED = {'$exists': True}
 CHAPTERS_PER_PART = 500
 
@@ -35,8 +36,15 @@ def create_html_ebook(book_source, book_list):
         for i in range(max_parts):
             h = BOOK_HEADER.format(header[FULL_NAME], header[AUTHOR], i + 1)
             body = ''
-            chapters = collection.find({TITLE_INDEX: FIELD_EXSITED}).sort(
-                TITLE_INDEX, pymongo.ASCENDING).limit(CHAPTERS_PER_PART).skip(i*CHAPTERS_PER_PART)
+
+            pipeline = [
+                {'$match': {TITLE_INDEX: FIELD_EXSITED}},
+                {'$sort': {TITLE_INDEX: pymongo.ASCENDING}},
+                {'$skip': i * CHAPTERS_PER_PART},
+                {'$limit': CHAPTERS_PER_PART}
+            ]
+
+            chapters = collection.aggregate(pipeline)
 
             for chapter in chapters:
                 arr = chapter[CONTENT].split('\n\n')

@@ -38,8 +38,14 @@ def create_html_ebook(book_source, book_list):
                 max_parts = max_parts + 1
 
             for i in range(max_parts):
-                chapters = collection.find({TITLE_INDEX: FIELD_EXSITED}).sort(
-                    TITLE_INDEX, pymongo.ASCENDING).limit(CHAPTERS_PER_PART).skip(i * CHAPTERS_PER_PART)
+                pipeline = [
+                    {'$match': {TITLE_INDEX: FIELD_EXSITED}},
+                    {'$sort': {TITLE_INDEX: pymongo.ASCENDING}},
+                    {'$skip': i * CHAPTERS_PER_PART},
+                    {'$limit': CHAPTERS_PER_PART}
+                ]
+
+                chapters = collection.aggregate(pipeline)
 
                 for chapter in chapters:
                     arr = chapter[CONTENT].split('\n\n')

@@ -16,7 +16,7 @@ from book_crawler.utilities.constants.common_constants import SHORT_NAME, TITLE_
 load_dotenv(dotenv_path='.env')
 
 
-class MongoPipeline(object):
+class MongoPipeline:
     def __init__(self):
         self.collection_name = None
         self.mongo_uri = os.getenv('MONGODB_URI')
@@ -48,7 +48,7 @@ class MongoPipeline(object):
             return item
 
 
-class BookListPipeline(object):
+class BookListPipeline:
     def open_spider(self, spider):
         self.list = []
 

@@ -44,7 +44,7 @@ def create_html_ebook(book_source, book_list):
                 {'$limit': CHAPTERS_PER_PART}
             ]
 
-            chapters = collection.aggregate(pipeline)
+            chapters = collection.aggregate(pipeline, allowDiskUse=True)
 
             for chapter in chapters:
                 arr = chapter[CONTENT].split('\n\n')

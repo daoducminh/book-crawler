@@ -28,6 +28,6 @@ setup(
         'rope',
         'python-dotenv',
         'dnspython',
-        'scrapy_cloudflare_middleware'
+        # 'scrapy_cloudflare_middleware'
     ]
 )

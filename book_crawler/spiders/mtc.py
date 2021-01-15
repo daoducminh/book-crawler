@@ -15,6 +15,7 @@ class MtcSpider(Spider):
     custom_settings = {
         'ITEM_PIPELINES': {
             'book_crawler.pipelines.MongoPipeline': 1,
+            'scrapy_cloudflare_middleware.middlewares.CloudFlareMiddleware': 560
         },
         'LOG_ENABLED': False,
         'DEFAULT_REQUEST_HEADERS': {

@@ -27,6 +27,7 @@ setup(
         'autopep8',
         'rope',
         'python-dotenv',
-        'dnspython'
+        'dnspython',
+        # 'scrapy_cloudflare_middleware'
     ]
 )

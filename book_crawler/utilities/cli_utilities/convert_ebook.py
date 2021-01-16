@@ -11,8 +11,10 @@ BOOK_DIR = 'books/{}'
 
 def convert_ebook(book_list):
     for book in book_list:
-        for file in listdir(BOOK_DIR.format(book)):
-            if book in file:
-                file_name = file[:-5]
-                system(CONVERT_CMD.format(book, file_name, AZW3, NO_INLINE_TOC))
-                system(CONVERT_CMD.format(book, file_name, EPUB, ''))
+        files = set([
+            file[:-5]
+            for file in listdir(BOOK_DIR.format(book)) if book in file
+        ])
+        for file_name in sorted(files):
+            system(CONVERT_CMD.format(book, file_name, AZW3, NO_INLINE_TOC))
+            system(CONVERT_CMD.format(book, file_name, EPUB, ''))

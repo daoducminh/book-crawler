@@ -41,7 +41,7 @@ class MongoPipeline:
             )
         else:
             self.db[short_name].update_one(
-                item,
+                {FULL_NAME: item[FULL_NAME]},
                 {'$set': item},
                 upsert=True
             )
